@@ -1,5 +1,5 @@
 # Xinabox SW01
-<img src="extras/SL01.png" width="300" align="right">
+<img src="extras/SW01.png" width="300" align="right">
 Digital (I2C) Humidity, Pressure and Temperature Sensor.
 This module can be purchased on [Xinabox CC](https://xinabox.cc/modules/sensors/SW01/)
 
