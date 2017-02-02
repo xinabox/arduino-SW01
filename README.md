@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/xinabox/SW01.svg?branch=master)](https://travis-ci.org/xinabox/SW01)
-# Xinabox SW01
+# Xinabox SW01 [![Build Status](https://travis-ci.org/xinabox/SW01.svg?branch=master)](https://travis-ci.org/xinabox/SW01)
 <img src="extras/SW01.png" width="300" align="right">
 Digital (I2C) Humidity, Pressure and Temperature Sensor.
 This module can be purchased on [Xinabox CC](https://xinabox.cc/modules/sensors/SW01/)
