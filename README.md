@@ -12,9 +12,10 @@ More information on the BME280 can be found in the [datasheet](https://ae-bst.re
 
 NASA/DOD TRL level 6 and the sensor is RoSH compliant.
 
-## Portability
-*TODO
-
+## Requirments
+   - xCore Library
+  - Arduino IDE 1.8.1
+  - ☒CHIP CWO1
 
 
 
