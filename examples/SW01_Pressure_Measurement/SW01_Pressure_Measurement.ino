@@ -49,8 +49,8 @@ void loop(){
 	float pressure;
 	pressure = 0;
  
-  // Read and calculate data from SW01 sensor
-  SW01.poll();
+  	// Read and calculate data from SW01 sensor
+  	SW01.poll();
   
 	// Request SW01 to get the pressure measurement and store in
 	// the pressure	variable		
@@ -61,6 +61,6 @@ void loop(){
 	Serial.print(pressure);
 	Serial.println(" Pa");
 
-  // Small delay between sensor reads  
+  	// Small delay between sensor reads  
 	delay(DELAY_TIME);
 }
