@@ -13,9 +13,9 @@ More information on the BME280 can be found in the [datasheet](https://ae-bst.re
 NASA/DOD TRL level 6 and the sensor is RoSH compliant.
 
 ## Requirments
-   - xCore Library
-  - Arduino IDE 1.8.1
-  - ☒CHIP CWO1
+  - [xCore Library](https://github.com/xinabox/xCore)
+  - [Arduino IDE 1.8.1](https://www.arduino.cc/en/main/software)
+  - ☒CHIP CWO1 or CC01 or CR01
 
 
 
