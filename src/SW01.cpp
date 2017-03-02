@@ -21,9 +21,9 @@
 *********************************************************/
 xSW01::xSW01(){
 	tempcal = 0.0;
-	temperature = 0.0;
-    	humidity = 0.0;
-    	pressure = 0.0;
+    temperature = 0.0;
+    humidity = 0.0;
+    pressure = 0.0;
 	altitude = 0.0;
 }
 
