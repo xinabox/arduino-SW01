@@ -6,22 +6,20 @@
 # Instance				(KEYWORD1)
 #######################################
 
-SW03					 KEYWORD1
+SW01					 KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
 begin   				 KEYWORD2
-getPressure_MB   		 KEYWORD2
-getPressure_HP   		 KEYWORD2
-getTemperature_F   		 KEYWORD2
+getPressure   			 KEYWORD2
 getTemperature_C   		 KEYWORD2
-getHumidity   		 	 KEYWORD2
+getTemperature_F   		 KEYWORD2
+getHumidity				 KEYWORD2
+getPressure			 	 KEYWORD2
 getAltitude			 	 KEYWORD2
 poll					 KEYWORD2
-setTempCal				 KEYWORD2
-setMode					 KEYWORD2
 
 #######################################
 # Constants 			(LITERAL1)
