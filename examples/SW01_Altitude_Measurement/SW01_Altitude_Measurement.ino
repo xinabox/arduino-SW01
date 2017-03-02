@@ -45,12 +45,12 @@ void setup(){
 }
 
 void loop(){
-	// Create a variable to store the data read from SW0
+	// Create a variable to store the data read from SW01
 	float alt;
 	alt = 0;
 
-  // Read and calculate data from SW01 sensor
-  SW01.poll();
+  	// Read and calculate data from SW01 sensor
+  	SW01.poll();
   
 	// Request SW01 to get the altitude measurement and store in
 	// the altitude variable	
