@@ -45,7 +45,7 @@ void setup(){
 }
 
 void loop(){
-	// Create a variable to store the data read from SW03	
+	// Create a variable to store the data read from SW01	
 	float temperature;
 	temperature = 0;
   
