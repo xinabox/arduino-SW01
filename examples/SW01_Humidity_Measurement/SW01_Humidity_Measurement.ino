@@ -38,10 +38,12 @@ void setup(){
 	// Start the  SW01 Sensor
 	SW01.begin();
 	
+	//Delay for sensor to normalise
+	delay(5000);
+	
 	Serial.println("================================");
 	Serial.println("     XINABOX SW01 Humidity      ");
 	Serial.println("================================");	
-	delay(DELAY_TIME);
 }
 
 void loop(){
