@@ -19,7 +19,7 @@
 /********************************************************
  	Constructor
 *********************************************************/
-xSW01::xSW01()
+xSW01::xSW01(void)
 {
 	tempcal = 0.0;
     temperature = 0.0;
@@ -31,7 +31,7 @@ xSW01::xSW01()
 /********************************************************
  	Configure Sensor
 *********************************************************/
-bool xSW01::begin()
+bool xSW01::begin(void)
 {
 	readSensorCoefficients();
 	xCore.write8(BME280_I2C_ADDRESS, BME280_REG_CONTROLHUMID, 0x01);
@@ -42,7 +42,7 @@ bool xSW01::begin()
 /********************************************************
  	Read Data from BME280 Sensor
 *********************************************************/
-void xSW01::poll()
+void xSW01::poll(void)
 {
 	readTemperature();
     readHumidity();
@@ -106,7 +106,7 @@ void xSW01::setTempCal(float offset)
 /********************************************************
  	Read Temperature from BME280 Sensor 
 *********************************************************/
-void xSW01::readTemperature()
+void xSW01::readTemperature(void)
 {
     int32_t var1, var2;
     
@@ -135,7 +135,7 @@ void xSW01::readTemperature()
 /********************************************************
  	Read Pressure from BME280 Sensor 
 *********************************************************/
-void xSW01::readPressure()
+void xSW01::readPressure(void)
 {
 	int64_t var1, var2, p;
     
@@ -172,7 +172,7 @@ void xSW01::readPressure()
 /********************************************************
  	Read Humidity from BME280 Sensor 
 *********************************************************/
-void xSW01::readHumidity()
+void xSW01::readHumidity(void)
 {
 	    
     int32_t rawHumidity = xCore.read16(BME280_I2C_ADDRESS, BME280_REG_HUMID);

@@ -123,7 +123,7 @@ class xSW01: public xCoreClass
 		void 	setTempCal(float offset);				
 		
 		/*
-		* Used to set a calibration offset for the temperature sensor. 
+		* Used read all raw sensors data and convert to usefull results. 
 		* Call this in loop(). Used to call sensor data reads.
 		*
 		* @return none
