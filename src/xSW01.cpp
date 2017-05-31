@@ -19,7 +19,8 @@
 /********************************************************
  	Constructor
 *********************************************************/
-xSW01::xSW01(){
+xSW01::xSW01()
+{
 	tempcal = 0.0;
     temperature = 0.0;
     humidity = 0.0;
@@ -30,7 +31,8 @@ xSW01::xSW01(){
 /********************************************************
  	Configure Sensor
 *********************************************************/
-bool xSW01::begin(){
+bool xSW01::begin()
+{
 	readSensorCoefficients();
 	xCore.write8(BME280_I2C_ADDRESS, BME280_REG_CONTROLHUMID, 0x01);
 	xCore.write8(BME280_I2C_ADDRESS, BME280_REG_CONTROLMEASURE, 0x3F);
@@ -40,7 +42,8 @@ bool xSW01::begin(){
 /********************************************************
  	Read Data from BME280 Sensor
 *********************************************************/
-void xSW01::poll(){
+void xSW01::poll()
+{
 	readTemperature();
     readHumidity();
     readPressure();
@@ -49,14 +52,16 @@ void xSW01::poll(){
 /********************************************************
  	Read Pressure from BME280 Sensor in Pa
 *********************************************************/
-float xSW01::getPressure(void){
+float xSW01::getPressure(void)
+{
 	return pressure;
 }
 
 /********************************************************
  	Read Altitude from BME280 Sensor
 *********************************************************/
-float xSW01::getAltitude(void){
+float xSW01::getAltitude(void)
+{
 	float atmospheric = pressure / 100.0F;
 	altitude = 44330.0 * (1.0 - pow(atmospheric / 1013.25, 0.1903));
     return altitude;
@@ -65,7 +70,8 @@ float xSW01::getAltitude(void){
 /********************************************************
  	Convert Temperature from BME280 Sensor to Celcuis
 *********************************************************/
-float xSW01::getTemperature_C(void){
+float xSW01::getTemperature_C(void)
+{
     temperature = temperature + tempcal;
     return temperature;	
 }
@@ -73,7 +79,8 @@ float xSW01::getTemperature_C(void){
 /********************************************************
  	Convert Temperature from BME280 Sensor to Farenhied
 *********************************************************/
-float xSW01::getTemperature_F(void){
+float xSW01::getTemperature_F(void)
+{
     temperature = temperature + tempcal;
     return temperature * 1.8 + 32;	
 }
@@ -81,14 +88,16 @@ float xSW01::getTemperature_F(void){
 /********************************************************
  	Read Humidity from BME280 Sensor
 *********************************************************/
-float xSW01::getHumidity(void){
+float xSW01::getHumidity(void)
+{
 	return humidity;
 }
 
 /********************************************************
  	Set temperature calibration data
 *********************************************************/
-void xSW01::setTempCal(float tcal){
+void xSW01::setTempCal(float offset)
+{
 	tempcal = tcal;
 }
 
@@ -97,7 +106,8 @@ void xSW01::setTempCal(float tcal){
 /********************************************************
  	Read Temperature from BME280 Sensor 
 *********************************************************/
-void xSW01::readTemperature(){
+void xSW01::readTemperature()
+{
     int32_t var1, var2;
     
     int32_t rawTemp = xCore.read24(BME280_I2C_ADDRESS, BME280_REG_TEMP);
@@ -125,7 +135,8 @@ void xSW01::readTemperature(){
 /********************************************************
  	Read Pressure from BME280 Sensor 
 *********************************************************/
-void xSW01::readPressure(){
+void xSW01::readPressure()
+{
 	int64_t var1, var2, p;
     
     int32_t rawPressure = xCore.read24(BME280_I2C_ADDRESS, BME280_REG_PRESSURE);    
@@ -161,7 +172,8 @@ void xSW01::readPressure(){
 /********************************************************
  	Read Humidity from BME280 Sensor 
 *********************************************************/
-void xSW01::readHumidity(){
+void xSW01::readHumidity()
+{
 	    
     int32_t rawHumidity = xCore.read16(BME280_I2C_ADDRESS, BME280_REG_HUMID);
     

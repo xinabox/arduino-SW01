@@ -21,7 +21,7 @@
 #include "math.h"
 
 //Device I2C Address
-#define BME280_I2C_ADDRESS		0x76
+#define BME280_I2C_ADDRESS			0x76
 
 // Register Defines
 #define BME280_REG_SOFTRESET   		0xE0
@@ -29,7 +29,7 @@
 #define BME280_REG_CAL26     		0xE1
 #define BME280_REG_CONTROLHUMID 	0xF2
 #define BME280_REG_STATUS       	0XF3
-#define BME280_REG_CONTROLMEASURE   	0xF4
+#define BME280_REG_CONTROLMEASURE   0xF4
 #define BME280_REG_CONFIG         	0xF5
 #define BME280_REG_PRESSURE  		0xF7
 #define BME280_REG_TEMP      		0xFA
@@ -56,10 +56,10 @@
 #define BME280_DIG_H6_REG   		0xE7
 
 // Oversampling Defines
-#define BME_OSR_1			0x01
-#define BME_OSR_2			0x02
-#define BME_OSR_4			0x03
-#define BME_OSR_8			0x04
+#define BME_OSR_1					0x01
+#define BME_OSR_2					0x02
+#define BME_OSR_4					0x03
+#define BME_OSR_8					0x04
 
 // Device ID
 #define BME280_REG_CHIPID      		0xD0
@@ -72,25 +72,25 @@ struct BME280_Calibration_Data
     public:
     
 	uint16_t dig_T1;
-        int16_t  dig_T2;
-        int16_t  dig_T3;
+    int16_t  dig_T2;
+    int16_t  dig_T3;
     
-        uint16_t dig_P1;
-        int16_t  dig_P2;
-        int16_t  dig_P3;
-        int16_t  dig_P4;
-        int16_t  dig_P5;
-        int16_t  dig_P6;
-        int16_t  dig_P7;
-        int16_t  dig_P8;
-        int16_t  dig_P9;
+    uint16_t dig_P1;
+    int16_t  dig_P2;
+    int16_t  dig_P3;
+    int16_t  dig_P4;
+    int16_t  dig_P5;
+    int16_t  dig_P6;
+    int16_t  dig_P7;
+    int16_t  dig_P8;
+    int16_t  dig_P9;
     
-        uint8_t  dig_H1;
-        int16_t  dig_H2;
-        uint8_t  dig_H3;
-        int16_t  dig_H4;
-        int16_t  dig_H5;
-        int8_t   dig_H6;
+    uint8_t  dig_H1;
+    int16_t  dig_H2;
+    uint8_t  dig_H3;
+    int16_t  dig_H4;
+    int16_t  dig_H5;
+    int8_t   dig_H6;
     
 };
 
@@ -99,22 +99,112 @@ struct BME280_Calibration_Data
 class xSW01: public xCoreClass
 {
     public:
-		xSW01();	
+		/**
+		* Constructor
+		* Creates a new instance of Sensor class.
+		*/	
+		xSW01();
+		
+		/*
+		* Runs the setup of the sensor. 
+		* Call this in setup(), before reading any sensor data.
+		*
+		* @return true if setup was successful.
+		*/
 		bool 	begin();
-		void 	setMode();
-		void 	setTempCal(float);					// we can set a calibration ofsset for the temperature
-		void 	poll(void);                      	// read the sensor for data
+		
+		/*
+		* Used to set a calibration offset for the temperature sensor. 
+		* Call this in setup(), after begin().
+		*
+		* @param offset. Float value of temperature off.
+		* @return none
+		*/		
+		void 	setTempCal(float offset);				
+		
+		/*
+		* Used to set a calibration offset for the temperature sensor. 
+		* Call this in loop(). Used to call sensor data reads.
+		*
+		* @return none
+		*/
+		void 	poll(void);                      
+		
+		/*
+		* Used to get the temperature value in degress celcuis.
+		* Call this in loop(). Used to get sensor temperature.
+		*
+		* @return temperature. Returns float value of temperature.
+		*/		
 		float 	getTemperature_C(void);				// temperature in celcuis
+		
+		/*
+		* Used to get the temperature value in degress farenhied.
+		* Call this in loop(). Used to get sensor temperature.
+		*
+		* @return temperature. Returns float value of temperature.
+		*/		
 		float 	getTemperature_F(void);				// temperature in farenhied 
+		
+		/*
+		* Used to set a calibration offset for the temperature sensor 
+		* Call this in loop(). Used to get sensor humidity value.
+		*
+		* @return humidity. Returns float value in percentage form.
+		*/		
 		float 	getHumidity(void);
+		
+		/*
+		* Used to set a calibration offset for the temperature sensor 
+		* Call this in loop(). Used to get sensor temperature.
+		*
+		* @return pressure. Returns flost value in pascals
+		*/		
 		float 	getPressure(void);               	// pressure in pascals
-		float 	getAltitude(void);					// altitude in meters
-	private:		
-		BME280_Calibration_Data cal_data;			// holds all of the sensor calibration data
+		
+		/*
+		* Used to set a calibration offset for the temperature sensor 
+		* Call this in loop(). Used to get sensor altitude value.
+		*
+		* @return altitude. Returns float value in meters.
+		*/		
+		float 	getAltitude(void);					
+		
+	private:	
+
+		/*
+		* Structure
+		* Stores calibration data.
+		*/		
+		BME280_Calibration_Data cal_data;		
     
+		/*
+		* Reads RAW temperature data.
+		*
+		* @return none
+		*/		
 		void readTemperature(void);
+		
+		/*
+		* Reads RAW pressure data.
+		*
+		* @return none
+		*/			
 		void readPressure(void);
+		
+		/*
+		* Reads RAW humidity data.
+		*
+		* @return none
+		*/			
 		void readHumidity(void);
+		
+		/*
+		* Reads sensors coefficients for calibration.
+		* Stores data in calibration data structure.
+		*
+		* @return none
+		*/			
 		void readSensorCoefficients(void);
     
 		float    tempcal;							// stores the temp offset calibration
