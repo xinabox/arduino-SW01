@@ -98,7 +98,7 @@ float xSW01::getHumidity(void)
 *********************************************************/
 void xSW01::setTempCal(float offset)
 {
-	tempcal = tcal;
+	tempcal = offset;
 }
 
 /*--Private Class Function--*/
