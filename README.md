@@ -9,7 +9,7 @@ The SW01 makes use of the BME280 produced by Bosch. This precision sensor from B
 
 The SW01 module is housed in an extremely compact 2U×2U chip. SW01 was designed to have the sensor isolated in the middle of the ☒CHIP to safeguard the sensor against any unwanted heat radiated from the other devices. 
 
-More information on the BME280 can be found in the [datasheet](https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-11.pdf)
+More information on the BME280 can be found in the [datasheet](https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-11.pdf).
 
 NASA/DOD TRL level 6 and the sensor is RoSH compliant.
 
