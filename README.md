@@ -1,7 +1,8 @@
 # ☒CHIP SW01 
 <img src="extras/SW01.png" width="300" align="right">
 Digital (I2C) Humidity, Pressure and Temperature Sensor.
-This module can be purchased on [Xinabox CC](https://xinabox.cc/SW01)
+
+This module can be purchased on [Xinabox CC](https://xinabox.cc/SW01/).
 
 ## About the SW01
 The SW01 makes use of the BME280 produced by Bosch. This precision sensor from Bosch is the best low-cost sensing solution for measuring barometric pressure,temperature and relative humidity. Making use of changes in pressure allows for the measurement of alititude because pressure changes with altitude, therefore allowing it to be used as a altimeter.
