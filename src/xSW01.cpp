@@ -22,9 +22,9 @@
 xSW01::xSW01(void)
 {
 	tempcal = 0.0;
-    temperature = 0.0;
-    humidity = 0.0;
-    pressure = 0.0;
+	temperature = 0.0;
+	humidity = 0.0;
+	pressure = 0.0;
 	altitude = 0.0;
 	dewpoint = 0.0;
 }
@@ -46,8 +46,8 @@ bool xSW01::begin(void)
 void xSW01::poll(void)
 {
 	readTemperature();
-    readHumidity();
-    readPressure();
+	readHumidity();
+	readPressure();
 }
 
 /********************************************************
@@ -63,9 +63,9 @@ float xSW01::getPressure(void)
 *********************************************************/
 float xSW01::getAltitude(void)
 {
-	float atmospheric = pressure / 100.0F;
-	altitude = 44330.0 * (1.0 - pow(atmospheric / 1013.25, 0.1903));
-    return altitude;
+	float atmospheric = pressure / 100.0;
+	altitude = 44330.0 * (1.0 - pow((atmospheric/1013.25), 1/5.255));
+	return altitude;
 }
 
 /********************************************************
