@@ -32,7 +32,9 @@
 #define BME280_REG_CONTROLMEASURE   0xF4
 #define BME280_REG_CONFIG         	0xF5
 #define BME280_REG_PRESSURE  		0xF7
-#define BME280_REG_TEMP      		0xFA
+#define BME280_REG_TEMP_MSB    		0xFA
+#define BME280_REG_TEMP_CSB    		0xFB
+#define BME280_REG_TEMP_LSB    		0xFC
 #define BME280_REG_HUMID    		0xFD
 
 #define BME280_DIG_T1_REG   		0x88
@@ -68,8 +70,10 @@
 /*=========================================================================*/
 
 struct BME280_Calibration_Data
-{    
-		uint16_t dig_T1;
+{
+    public:
+    
+	uint16_t dig_T1;
     int16_t  dig_T2;
     int16_t  dig_T3;
     
@@ -88,7 +92,8 @@ struct BME280_Calibration_Data
     uint8_t  dig_H3;
     int16_t  dig_H4;
     int16_t  dig_H5;
-    int8_t   dig_H6;   
+    int8_t   dig_H6;
+    
 };
 
 /*=========================================================================*/
@@ -144,7 +149,7 @@ class xSW01: public xCoreClass
 		float 	getTemperature_F(void);				// temperature in farenhied 
 		
 		/*
-		* Used to get the humidity value 
+		* Used to get the relative humidity percantage
 		* Call this in loop(). Used to get sensor humidity value.
 		*
 		* @return humidity. Returns float value in percentage form.
@@ -152,28 +157,28 @@ class xSW01: public xCoreClass
 		float 	getHumidity(void);
 		
 		/*
-		* Used to get the pressure value 
-		* Call this in loop(). Used to get sensor pressure.
+		* Used to get the pressure in pascals
+		* Call this in loop(). Used to get sensor temperature.
 		*
 		* @return pressure. Returns flost value in pascals
 		*/		
 		float 	getPressure(void);               	// pressure in pascals
 		
 		/*
-		* Used to get the altitude value 
+		* Used to get the approxiamte altitude in meters
 		* Call this in loop(). Used to get sensor altitude value.
 		*
 		* @return altitude. Returns float value in meters.
 		*/		
-		float 	getAltitude(void);	
-
+		float 	getAltitude(void);
+		
 		/*
-		* Used to get the dew point value
-		* Call this in loop(). Used to get sensor value.
+		* Used to get dew point in celcuis
+		* Call this in loop(). Used to get sensor dew point value.
 		*
-		* @return depoint. Returns float value.
-		*/	
-		float 	getDewPoint(void);
+		* @return dewpoint. Returns float value in celcuis.
+		*/				
+		float 	getDewPoint(void);	
 		
 	private:	
 
@@ -212,12 +217,13 @@ class xSW01: public xCoreClass
 		*/			
 		void readSensorCoefficients(void);
     
-		float    tempcal;							// stores the temp offset calibration
-		float    temperature;                       // stores temperature value
-		float    humidity;                          // stores humidity value
-		float    pressure;                          // stores pressure value
-		float 	 altitude;							// stores calculated altitude 
-		int32_t  t_fine;
+		float   tempcal;							// stores the temp offset calibration
+		float   temperature;                       // stores temperature value
+		float   humidity;                          // stores humidity value
+		float   pressure;                          // stores pressure value
+		float 	altitude;							// stores calculated altitude 
+		float 	dewpoint;
+		int32_t t_fine;
 };
 
 extern xSW01 SW01;
