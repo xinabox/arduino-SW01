@@ -68,10 +68,8 @@
 /*=========================================================================*/
 
 struct BME280_Calibration_Data
-{
-    public:
-    
-	uint16_t dig_T1;
+{    
+		uint16_t dig_T1;
     int16_t  dig_T2;
     int16_t  dig_T3;
     
@@ -90,8 +88,7 @@ struct BME280_Calibration_Data
     uint8_t  dig_H3;
     int16_t  dig_H4;
     int16_t  dig_H5;
-    int8_t   dig_H6;
-    
+    int8_t   dig_H6;   
 };
 
 /*=========================================================================*/
@@ -147,7 +144,7 @@ class xSW01: public xCoreClass
 		float 	getTemperature_F(void);				// temperature in farenhied 
 		
 		/*
-		* Used to set a calibration offset for the temperature sensor 
+		* Used to get the humidity value 
 		* Call this in loop(). Used to get sensor humidity value.
 		*
 		* @return humidity. Returns float value in percentage form.
@@ -155,20 +152,28 @@ class xSW01: public xCoreClass
 		float 	getHumidity(void);
 		
 		/*
-		* Used to set a calibration offset for the temperature sensor 
-		* Call this in loop(). Used to get sensor temperature.
+		* Used to get the pressure value 
+		* Call this in loop(). Used to get sensor pressure.
 		*
 		* @return pressure. Returns flost value in pascals
 		*/		
 		float 	getPressure(void);               	// pressure in pascals
 		
 		/*
-		* Used to set a calibration offset for the temperature sensor 
+		* Used to get the altitude value 
 		* Call this in loop(). Used to get sensor altitude value.
 		*
 		* @return altitude. Returns float value in meters.
 		*/		
-		float 	getAltitude(void);					
+		float 	getAltitude(void);	
+
+		/*
+		* Used to get the dew point value
+		* Call this in loop(). Used to get sensor value.
+		*
+		* @return depoint. Returns float value.
+		*/	
+		float 	getDewPoint(void);
 		
 	private:	
 
