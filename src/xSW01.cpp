@@ -22,10 +22,11 @@
 xSW01::xSW01(void)
 {
 	tempcal = 0.0;
-  temperature = 0.0;
-  humidity = 0.0;
-  pressure = 0.0;
+    temperature = 0.0;
+    humidity = 0.0;
+    pressure = 0.0;
 	altitude = 0.0;
+	dewpoint = 0.0;
 }
 
 /********************************************************
@@ -45,8 +46,8 @@ bool xSW01::begin(void)
 void xSW01::poll(void)
 {
 	readTemperature();
-  readHumidity();
-  readPressure();
+    readHumidity();
+    readPressure();
 }
 
 /********************************************************
@@ -58,22 +59,22 @@ float xSW01::getPressure(void)
 }
 
 /********************************************************
- 	Read Altitude from BME280 Sensor
+ 	Read Altitude from BME280 Sensor in meters
 *********************************************************/
 float xSW01::getAltitude(void)
 {
 	float atmospheric = pressure / 100.0F;
 	altitude = 44330.0 * (1.0 - pow(atmospheric / 1013.25, 0.1903));
-  return altitude;
+    return altitude;
 }
 
 /********************************************************
- 	Convert Temperature from BME280 Sensor to Celcuis
+ 	Temperature from BME280 Sensor in Celcuis
 *********************************************************/
 float xSW01::getTemperature_C(void)
 {
-	temperature = temperature + tempcal;
-  return temperature;	
+    temperature = temperature + tempcal;
+    return temperature;	
 }
 
 /********************************************************
@@ -86,7 +87,7 @@ float xSW01::getTemperature_F(void)
 }
 
 /********************************************************
- 	Read Humidity from BME280 Sensor
+ 	Read Humidity from BME280 Sensor 
 *********************************************************/
 float xSW01::getHumidity(void)
 {
@@ -101,6 +102,18 @@ void xSW01::setTempCal(float offset)
 	tempcal = offset;
 }
 
+
+/********************************************************
+ 	Read Dew Point from BME280 Sensor in Celcuis
+*********************************************************/
+float xSW01::getDewPoint(void)
+{
+    dewpoint = 243.04 * (log(humidity/100.0) + ((17.625 * temperature)/(243.04 + temperature)))
+    /(17.625 - log(humidity/100.0) - ((17.625 * temperature)/(243.04 + temperature)));
+	
+	return dewpoint;
+}
+
 /*--Private Class Function--*/
 
 /********************************************************
@@ -108,27 +121,22 @@ void xSW01::setTempCal(float offset)
 *********************************************************/
 void xSW01::readTemperature(void)
 {
-	int32_t var1, var2;
+    int32_t var1, var2;
     
-  int32_t rawTemp = xCore.read24(BME280_I2C_ADDRESS, BME280_REG_TEMP);
-        
-  rawTemp >>= 4;
+    int32_t rawTemp = ((uint32_t)xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 12);
+	rawTemp |= ((uint32_t)xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 4);
+	rawTemp |= ((xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 4) & 0x0F);
+  
     
-  var1  = ((((rawTemp >>3) - ((int32_t)cal_data.dig_T1 <<1))) *
-             
-          ((int32_t)cal_data.dig_T2)) >> 11;
+    var1  = ((((rawTemp >>3) - ((int32_t)cal_data.dig_T1 <<1)))*((int32_t)cal_data.dig_T2)) >> 11;
     
-  var2  = (((((rawTemp >>4) - ((int32_t)cal_data.dig_T1)) *
-               
-          ((rawTemp >>4) - ((int32_t)cal_data.dig_T1))) >> 12) *
-             
-          ((int32_t)cal_data.dig_T3)) >> 14;
+    var2  = (((((rawTemp >>4) - ((int32_t)cal_data.dig_T1))*((rawTemp >>4) - ((int32_t)cal_data.dig_T1))) >> 12)*((int32_t)cal_data.dig_T3)) >> 14;
     
-  t_fine = var1 + var2;
-     
-  temperature  = (t_fine * 5 + 128) >> 8;
+    t_fine = var1 + var2;    
     
-	temperature = temperature / 100;
+    temperature  = (t_fine * 5 + 128) >> 8;
+    
+    temperature = temperature / 100;
 }
 
 /********************************************************
@@ -138,34 +146,33 @@ void xSW01::readPressure(void)
 {
 	int64_t var1, var2, p;
     
-  int32_t rawPressure = xCore.read24(BME280_I2C_ADDRESS, BME280_REG_PRESSURE);    
-  rawPressure >>= 4;
-  
-  var1 = 	((int64_t)t_fine) - 128000;
+    int32_t rawPressure = xCore.read24(BME280_I2C_ADDRESS, BME280_REG_PRESSURE);    
+    rawPressure >>= 4;
     
-  var2 = 	var1 * var1 * (int64_t)cal_data.dig_P6;
+    var1 = 	((int64_t)t_fine) - 128000;
+    
+    var2 = 	var1 * var1 * (int64_t)cal_data.dig_P6;
 	
-  var2 = 	var2 + ((var1*(int64_t)cal_data.dig_P5)<<17); 
+    var2 = 	var2 + ((var1*(int64_t)cal_data.dig_P5)<<17); 
 	
-	var2 = 	var2 + (((int64_t)cal_data.dig_P4)<<35);
+    var2 = 	var2 + (((int64_t)cal_data.dig_P4)<<35);
 	
-	var1 = 	((var1 * var1 * (int64_t)cal_data.dig_P3)>>8) + 
-			((var1 * (int64_t)cal_data.dig_P2)<<12);
+    var1 = 	((var1 * var1 * (int64_t)cal_data.dig_P3)>>8) + ((var1 * (int64_t)cal_data.dig_P2)<<12);
     
 	var1 = 	(((((int64_t)1)<<47)+var1))*((int64_t)cal_data.dig_P1)>>33;
    
-  if (var1 == 0) {
-      pressure = 0.0;
-  }
+    if (var1 == 0) {
+        pressure = 0.0;
+    }
     
-  p = 1048576 - rawPressure;
-  p = (((p<<31) - var2)*3125) / var1;  
-  var1 = (((int64_t)cal_data.dig_P9) * (p>>13) * (p>>13)) >> 25;
-  var2 = (((int64_t)cal_data.dig_P8) * p) >> 19;
+    p = 1048576 - rawPressure;
+    p = (((p<<31) - var2)*3125) / var1;  
+    var1 = (((int64_t)cal_data.dig_P9) * (p>>13) * (p>>13)) >> 25;
+    var2 = (((int64_t)cal_data.dig_P8) * p) >> 19;
     
-  p = ((p + var1 + var2) >> 8) + (((int64_t)cal_data.dig_P7)<<4);
+    p = ((p + var1 + var2) >> 8) + (((int64_t)cal_data.dig_P7)<<4);
     
-  pressure = (float)p/256;
+    pressure = (float)p/256;
 }
 
 /********************************************************
@@ -174,13 +181,13 @@ void xSW01::readPressure(void)
 void xSW01::readHumidity(void)
 {
 	    
-	int32_t rawHumidity = xCore.read16(BME280_I2C_ADDRESS, BME280_REG_HUMID);
+    int32_t rawHumidity = xCore.read16(BME280_I2C_ADDRESS, BME280_REG_HUMID);
     
-  int32_t v_x1_u32r;
+    int32_t v_x1_u32r;
     
-  v_x1_u32r = (t_fine - ((int32_t)76800));
+    v_x1_u32r = (t_fine - ((int32_t)76800));
 	
-  v_x1_u32r = (((((rawHumidity << 14) - (((int32_t)cal_data.dig_H4) << 20) - 
+    v_x1_u32r = (((((rawHumidity << 14) - (((int32_t)cal_data.dig_H4) << 20) - 
 				(((int32_t)cal_data.dig_H5) * v_x1_u32r)) + ((int32_t)16384)) >> 15) *  
 				(((((((v_x1_u32r * ((int32_t)cal_data.dig_H6)) >> 10) * (((v_x1_u32r * 
 				((int32_t)cal_data.dig_H3)) >> 11) + ((int32_t)32768))) >> 10) + 
@@ -189,13 +196,13 @@ void xSW01::readHumidity(void)
 	v_x1_u32r = (v_x1_u32r - (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * 
 				((int32_t)cal_data.dig_H1)) >> 4));
 				
-  v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;  
+    v_x1_u32r = (v_x1_u32r < 0) ? 0 : v_x1_u32r;  
 	
-  v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
+    v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
     
-  float h = (v_x1_u32r>>12);
+    float h = (v_x1_u32r>>12);
     
-  humidity = h / 1024.0;
+    humidity = h / 1024.0;
 }
 
 /********************************************************
