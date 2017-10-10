@@ -1,3 +1,4 @@
+[![GitHub version](https://badge.fury.io/gh/xinabox%2FxSW01.svg)](https://badge.fury.io/gh/xinabox%2FxSW01)
 # ☒CHIP SW01 
 <img src="extras/SW01 V1.0.0.JPG" width="300" align="right">
 Digital (I2C) Humidity, Pressure and Temperature Sensor.
