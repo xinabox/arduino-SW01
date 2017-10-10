@@ -3,23 +3,19 @@
 	Digital Temperature, Pressure and Humidity Sensor
 	
 	You can buy one on our store!
-	-----> https://xinabox.cc/SW01/
+	-----> https://xinabox.cc/products/SW01
 	
 	This example request a pressure meausrement to be 
 	made by the SW01 and display the data over the Serial
 	bus.
 	
-	Currently Supported on the following ☒CHIP:
-	- CW01
-	- CC01
-	- CR01
+	Supported on the all ☒CHIPs
 	
 	The sensor communicates over the I2C Bus.
 	
 	------------------------TIPS--------------------------
-	Change this line ----->Wire.begin(2,14);
-	to this			 ----->Wire.begin();
-	to allow this sensor to communicate with CC01 and CR01
+	Comment out this line ----->Wire.pins(2, 14); for support
+	on other devices
 	
 *************************************************************/
 
@@ -32,8 +28,11 @@ void setup(){
 	// Start the Serial Monitor
 	Serial.begin(115200);
 	
+	// Set the I2C Pins for CW01
+	Wire.pins(2, 14);
+
 	// Start the I2C Comunication
-	Wire.begin(2,14);
+	Wire.begin();
 	
 	// Start the  SW01 Sensor
 	SW01.begin();
