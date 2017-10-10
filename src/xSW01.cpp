@@ -71,7 +71,7 @@ float xSW01::getAltitude(void)
 /********************************************************
  	Temperature from BME280 Sensor in Celcuis
 *********************************************************/
-float xSW01::getTemperature_C(void)
+float xSW01::getTempC(void)
 {
     temperature = temperature + tempcal;
     return temperature;	
@@ -80,7 +80,7 @@ float xSW01::getTemperature_C(void)
 /********************************************************
  	Convert Temperature from BME280 Sensor to Farenhied
 *********************************************************/
-float xSW01::getTemperature_F(void)
+float xSW01::getTempF(void)
 {
 	temperature = temperature + tempcal;
   return temperature * 1.8 + 32;	
@@ -230,4 +230,3 @@ void xSW01::readSensorCoefficients(void)
     cal_data.dig_H6 = (int8_t)xCore.read8(BME280_I2C_ADDRESS, BME280_DIG_H6_REG);   
 }
 
-xSW01 SW01 = xSW01();

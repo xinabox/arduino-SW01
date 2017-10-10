@@ -138,7 +138,7 @@ class xSW01: public xCoreClass
 		*
 		* @return temperature. Returns float value of temperature.
 		*/		
-		float 	getTemperature_C(void);				// temperature in celcuis
+		float 	getTempC(void);				
 		
 		/*
 		* Used to get the temperature value in degress farenhied.
@@ -146,7 +146,7 @@ class xSW01: public xCoreClass
 		*
 		* @return temperature. Returns float value of temperature.
 		*/		
-		float 	getTemperature_F(void);				// temperature in farenhied 
+		float 	getTempF(void);			
 		
 		/*
 		* Used to get the relative humidity percantage
@@ -225,7 +225,5 @@ class xSW01: public xCoreClass
 		float 	dewpoint;
 		int32_t t_fine;
 };
-
-extern xSW01 SW01;
 
 #endif
