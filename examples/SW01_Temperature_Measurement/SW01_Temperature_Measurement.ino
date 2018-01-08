@@ -23,6 +23,8 @@
 
 const int DELAY_TIME = 1000;
 
+xSW01 SW01;
+
 void setup(){
 	// Start the Serial Monitor
 	Serial.begin(115200);

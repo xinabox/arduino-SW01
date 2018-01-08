@@ -22,6 +22,8 @@
 #include <xCore.h>
 #include <xSW01.h>
 
+xSW01 SW01;
+
 const int DELAY_TIME = 1000;
 
 void setup(){

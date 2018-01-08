@@ -26,14 +26,19 @@
 #include <xCore.h>
 #include <xSW01.h>
 
+xSW01 SW01;
+
 const int DELAY_TIME = 1000;
 
 void setup(){
 	// Start the Serial Monitor
 	Serial.begin(115200);
 	
+	// Set the I2C Pins for CW01
+	Wire.pins(2, 14);
+
 	// Start the I2C Comunication
-	Wire.begin(2,14);
+	Wire.begin();
 	
 	// Start the  SW01 Sensor
 	SW01.begin();

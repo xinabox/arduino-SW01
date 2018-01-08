@@ -22,6 +22,8 @@
 #include <xCore.h>
 #include <xSW01.h>
 
+xSW01 SW01;
+
 const int DELAY_TIME = 1000;
 
 void setup(){
@@ -32,7 +34,7 @@ void setup(){
 	Wire.pins(2, 14);
 	
 	// Start the I2C Comunication
-	Wire.begin(2,14);
+	Wire.begin();
 	
 	// Start the  SW01 Sensor
 	SW01.begin();
