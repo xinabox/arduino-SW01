@@ -17,9 +17,8 @@
 	The sensor communicates over the I2C Bus.
 	
 	------------------------TIPS--------------------------
-	Change this line ----->Wire.begin(2,14);
-	to this			 ----->Wire.begin();
-	to allow this sensor to communicate with CC01 and CR01
+	Comment out this line ----->Wire.pins(2, 14); for support
+	on other devices
 	
 *************************************************************/
 
