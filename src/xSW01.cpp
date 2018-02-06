@@ -27,8 +27,20 @@ xSW01::xSW01(void)
 	pressure = 0.0;
 	altitude = 0.0;
 	dewpoint = 0.0;
+	BME_I2C_ADDRESS = 0x76;
 }
 
+xSW01::xSW01(uint8_t addr)
+{
+	tempcal = 0.0;
+	temperature = 0.0;
+	humidity = 0.0;
+	pressure = 0.0;
+	altitude = 0.0;
+	dewpoint = 0.0;
+	BME_I2C_ADDRESS = addr;
+}
+	
 /********************************************************
  	Configure Sensor
 *********************************************************/
