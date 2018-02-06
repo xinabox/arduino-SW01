@@ -167,7 +167,7 @@ class xSW01: public xCoreClass
 		*
 		* @return altitude. Returns float value in meters.
 		*/		
-		float 	getAltitude(void);
+		float 	getQNE(void);
 		
 		/*
 		* Used to get the approxiamte altitude in meters
