@@ -17,6 +17,7 @@ getTempF   		 		KEYWORD2
 getHumidity				KEYWORD2
 getPressure			 	KEYWORD2
 getAltitude			 	KEYWORD2
+getQNE        KEYWORD2
 poll					KEYWORD2
 
 #######################################
