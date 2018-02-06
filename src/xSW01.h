@@ -162,7 +162,7 @@ class xSW01: public xCoreClass
 		float 	getPressure(void);               	// pressure in pascals
 		
 		/*
-		* Used to get the approxiamte altitude in meters
+		* Used to get Altitude based on standard sea-level pressure
 		* Call this in loop(). Used to get sensor altitude value.
 		*
 		* @return altitude. Returns float value in meters.
