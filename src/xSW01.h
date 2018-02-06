@@ -173,6 +173,15 @@ class xSW01: public xCoreClass
 		float 	getAltitude(void);
 		
 		/*
+		* Used to get the approxiamte altitude in meters
+		* Call this in loop(). Used to get sensor altitude value.
+		*
+		* @param sea_level_pressure, input sea level pressure.
+		* @return altitude. Returns float value in meters.
+		*/		
+		float 	getAltitude(float sea_level_pressure);
+		
+		/*
 		* Used to get dew point in celcuis
 		* Call this in loop(). Used to get sensor dew point value.
 		*
