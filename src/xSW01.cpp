@@ -71,15 +71,18 @@ float xSW01::getPressure(void)
 }
 
 /********************************************************
- 	Read Altitude from BME280 Sensor in meters
+ 	Read Altitude based on standard sea-level pressure
 *********************************************************/
-float xSW01::getAltitude(void)
+float xSW01::getQNE(void)
 {
 	float atmospheric = pressure / 100.0;
 	altitude = 44330.0 * (1.0 - pow((atmospheric/1013.25), 1/5.255));
 	return altitude;
 }
 
+/********************************************************
+ 	Read Altitude from BME280 Sensor in meters
+*********************************************************/
 float xSW01::getAltitude(float sea_level_pressure)
 {
 	float atmospheric = pressure / 100.0;
