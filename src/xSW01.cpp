@@ -27,7 +27,7 @@ xSW01::xSW01(void)
 	pressure = 0.0;
 	altitude = 0.0;
 	dewpoint = 0.0;
-	BME_I2C_ADDRESS = 0x76;
+	BME280_I2C_ADDRESS = 0x76;
 }
 
 xSW01::xSW01(uint8_t addr)
@@ -38,7 +38,7 @@ xSW01::xSW01(uint8_t addr)
 	pressure = 0.0;
 	altitude = 0.0;
 	dewpoint = 0.0;
-	BME_I2C_ADDRESS = addr;
+	BME280_I2C_ADDRESS = addr;
 }
 	
 /********************************************************
