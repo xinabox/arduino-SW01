@@ -68,6 +68,13 @@ float xSW01::getAltitude(void)
 	return altitude;
 }
 
+float xSW01::getAltitude(float sea_level_pressure)
+{
+	float atmospheric = pressure / 100.0;
+	altitude = 44330.0 * (1.0 - pow((atmospheric/sea_level_pressure), 1/5.255));
+	return altitude;
+}
+
 /********************************************************
  	Temperature from BME280 Sensor in Celcuis
 *********************************************************/
