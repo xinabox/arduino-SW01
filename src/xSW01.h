@@ -20,9 +20,6 @@
 #include "xCore.h"
 #include "math.h"
 
-//Device I2C Address
-#define BME280_I2C_ADDRESS			0x76
-
 // Register Defines
 #define BME280_REG_SOFTRESET   		0xE0
 
@@ -73,26 +70,26 @@ struct BME280_Calibration_Data
 {
     public:
     
-	uint16_t dig_T1;
-    int16_t  dig_T2;
-    int16_t  dig_T3;
-    
-    uint16_t dig_P1;
-    int16_t  dig_P2;
-    int16_t  dig_P3;
-    int16_t  dig_P4;
-    int16_t  dig_P5;
-    int16_t  dig_P6;
-    int16_t  dig_P7;
-    int16_t  dig_P8;
-    int16_t  dig_P9;
-    
-    uint8_t  dig_H1;
-    int16_t  dig_H2;
-    uint8_t  dig_H3;
-    int16_t  dig_H4;
-    int16_t  dig_H5;
-    int8_t   dig_H6;
+			uint16_t dig_T1;
+	    int16_t  dig_T2;
+	    int16_t  dig_T3;
+
+	    uint16_t dig_P1;
+	    int16_t  dig_P2;
+	    int16_t  dig_P3;
+	    int16_t  dig_P4;
+	    int16_t  dig_P5;
+	    int16_t  dig_P6;
+	    int16_t  dig_P7;
+	    int16_t  dig_P8;
+	    int16_t  dig_P9;
+
+	    uint8_t  dig_H1;
+	    int16_t  dig_H2;
+	    uint8_t  dig_H3;
+	    int16_t  dig_H4;
+	    int16_t  dig_H5;
+	    int8_t   dig_H6;
     
 };
 
@@ -106,7 +103,7 @@ class xSW01: public xCoreClass
 		* Creates a new instance of Sensor class.
 		*/	
 		xSW01();
-		
+		xSW01(uint8_t addr);
 		/*
 		* Runs the setup of the sensor. 
 		* Call this in setup(), before reading any sensor data.
@@ -233,6 +230,10 @@ class xSW01: public xCoreClass
 		float 	altitude;							// stores calculated altitude 
 		float 	dewpoint;
 		int32_t t_fine;
+		
+		
+		//Device I2C Address
+		uint8_t BME280_I2C_ADDRESS;
 };
 
 #endif
