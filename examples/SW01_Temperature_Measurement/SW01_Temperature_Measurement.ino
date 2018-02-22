@@ -13,11 +13,8 @@
 	
 	The sensor communicates over the I2C Bus.
 	
-	------------------------TIPS--------------------------
-	Comment out this line ----->Wire.pins(2, 14); for support
-	on other devices
-	
 *************************************************************/
+
 #include <xCore.h>
 #include <xSW01.h>
 
@@ -30,7 +27,10 @@ void setup(){
 	Serial.begin(115200);
 
 	// Set the I2C Pins for CW01
-	Wire.pins(2, 14);
+	#ifdef ESP8266
+	  Wire.pins(2, 14);
+	  Wire.setClockStretchLimit(15000);
+	#endif
 	
 	// Start the I2C Comunication
 	Wire.begin();
@@ -52,8 +52,8 @@ void loop(){
 	float tempF;
 	tempC = tempF = 0;
   
-  // Read and calculate data from SW01 sensor
-  SW01.poll();
+	// Read and calculate data from SW01 sensor
+	SW01.poll();
   
 	// Request SW01 to get the temperature measurement and store in
 	// the temperature variable		
@@ -68,6 +68,6 @@ void loop(){
 	Serial.print(tempF);
 	Serial.println(" F");	
 
-  // Small delay between sensor reads
+  	// Small delay between sensor reads
 	delay(DELAY_TIME);
 }
