@@ -146,8 +146,8 @@ void xSW01::readTemperature(void)
     int32_t var1, var2;
     
     int32_t rawTemp = ((uint32_t)xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 12);
-	rawTemp |= ((uint32_t)xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 4);
-	rawTemp |= ((xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 4) & 0x0F);
+	rawTemp |= ((uint32_t)xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_CSB) << 4);
+	rawTemp |= ((xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_LSB) << 4) & 0x0F);
   
     
     var1  = ((((rawTemp >>3) - ((int32_t)cal_data.dig_T1 <<1)))*((int32_t)cal_data.dig_T2)) >> 11;
