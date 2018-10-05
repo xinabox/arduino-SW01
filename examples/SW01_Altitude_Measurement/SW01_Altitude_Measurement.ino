@@ -63,7 +63,7 @@ void loop(){
   
 	// Request SW01 to get the altitude measurement and store in
 	// the altitude variable	
-	alt = SW01.getAltitude();
+	alt = SW01.getAltitude(101325);
 	
 	// Display the recoreded data over the Serial Monitor	
 	Serial.print("Altitude: ");
