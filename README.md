@@ -1,5 +1,3 @@
-[![GitHub issues](https://img.shields.io/github/issues/xinabox/xSW01.svg)](https://github.com/xinabox/xSW01/issues)
-
 # ☒CHIP SW01 
 <img src="extras/SW01-V1.0.1.JPG" width="35%" height="auto" align="right">
 Digital (I2C) Humidity, Pressure and Temperature Sensor.
