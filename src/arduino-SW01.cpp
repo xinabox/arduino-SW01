@@ -11,7 +11,7 @@
 	BME280 - https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-11.pdf
 */
 
-#include "Arduino_SW01.h"
+#include "arduino-SW01.h"
 #include <math.h>
   
 /*--Public Class Function--*/

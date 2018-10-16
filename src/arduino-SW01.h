@@ -11,8 +11,8 @@
 	BME280 - https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME280_DS001-11.pdf
 */
 
-#ifndef Arduino_SW01_h
-#define Arduino_SW01_h
+#ifndef arduino-SW01_h
+#define arduino-SW01_h
 
 // System Includes
 #include <inttypes.h>
