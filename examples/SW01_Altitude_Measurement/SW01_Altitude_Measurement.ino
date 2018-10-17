@@ -23,7 +23,7 @@
 *************************************************************/
 
 #include <xCore.h>
-#include <arduino-SW01.h>
+#include <xSW01.h>
 
 xSW01 SW01;
 
