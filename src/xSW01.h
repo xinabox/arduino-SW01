@@ -197,23 +197,23 @@ class xSW01: public xCoreClass
 		/*
 		* Reads RAW temperature data.
 		*
-		* @return none
+		* @return tempC
 		*/		
-		void readTemperature(void);
+		float readTemperature(void);
 		
 		/*
 		* Reads RAW pressure data.
 		*
-		* @return none
+		* @return pressure
 		*/			
-		void readPressure(void);
+		float readPressure(void);
 		
 		/*
 		* Reads RAW humidity data.
 		*
-		* @return none
+		* @return humidity
 		*/			
-		void readHumidity(void);
+		float readHumidity(void);
 		
 		/*
 		* Reads sensors coefficients for calibration.
@@ -224,11 +224,6 @@ class xSW01: public xCoreClass
 		void readSensorCoefficients(void);
     
 		float   tempcal;							// stores the temp offset calibration
-		float   temperature;                       // stores temperature value
-		float   humidity;                          // stores humidity value
-		float   pressure;                          // stores pressure value
-		float 	altitude;							// stores calculated altitude 
-		float 	dewpoint;
 		int32_t t_fine;
 		
 		

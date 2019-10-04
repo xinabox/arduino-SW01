@@ -22,22 +22,12 @@
 xSW01::xSW01(void)
 {
 	tempcal = 0.0;
-	temperature = 0.0;
-	humidity = 0.0;
-	pressure = 0.0;
-	altitude = 0.0;
-	dewpoint = 0.0;
 	BME280_I2C_ADDRESS = 0x76;
 }
 
 xSW01::xSW01(uint8_t addr)
 {
 	tempcal = 0.0;
-	temperature = 0.0;
-	humidity = 0.0;
-	pressure = 0.0;
-	altitude = 0.0;
-	dewpoint = 0.0;
 	BME280_I2C_ADDRESS = addr;
 }
 	
@@ -57,9 +47,7 @@ bool xSW01::begin(void)
 *********************************************************/
 void xSW01::poll(void)
 {
-	readTemperature();
-	readHumidity();
-	readPressure();
+	// depreciated
 }
 
 /********************************************************
@@ -67,6 +55,7 @@ void xSW01::poll(void)
 *********************************************************/
 float xSW01::getPressure(void)
 {
+	float pressure = readPressure();
 	return pressure;
 }
 
@@ -75,8 +64,9 @@ float xSW01::getPressure(void)
 *********************************************************/
 float xSW01::getQNE(void)
 {
+	float pressure = readPressure();
 	float atmospheric = pressure / 100.0;
-	altitude = 44330.0 * (1.0 - pow((atmospheric/1013.25), 1/5.255));
+	float altitude = 44330.0 * (1.0 - pow((atmospheric/1013.25), 1/5.255));
 	return altitude;
 }
 
@@ -85,8 +75,9 @@ float xSW01::getQNE(void)
 *********************************************************/
 float xSW01::getAltitude(float sea_level_pressure)
 {
+	float pressure = readPressure();
 	float atmospheric = pressure / 100.0;
-	altitude = 44330.0 * (1.0 - pow((atmospheric/(sea_level_pressure/100.0)), 1/5.255));
+	float altitude = 44330.0 * (1.0 - pow((atmospheric/(sea_level_pressure/100.0)), 1/5.255));
 	return altitude;
 }
 
@@ -95,6 +86,7 @@ float xSW01::getAltitude(float sea_level_pressure)
 *********************************************************/
 float xSW01::getTempC(void)
 {
+	float temperature = readTemperature();
     temperature = temperature + tempcal;
     return temperature;	
 }
@@ -104,8 +96,9 @@ float xSW01::getTempC(void)
 *********************************************************/
 float xSW01::getTempF(void)
 {
+	float temperature = readTemperature();
 	temperature = temperature + tempcal;
-  return temperature * 1.8 + 32;	
+  	return temperature * 1.8 + 32;	
 }
 
 /********************************************************
@@ -113,6 +106,7 @@ float xSW01::getTempF(void)
 *********************************************************/
 float xSW01::getHumidity(void)
 {
+	float humidity = readHumidity();
 	return humidity;
 }
 
@@ -124,13 +118,14 @@ void xSW01::setTempCal(float offset)
 	tempcal = offset;
 }
 
-
 /********************************************************
  	Read Dew Point from BME280 Sensor in Celcuis
 *********************************************************/
 float xSW01::getDewPoint(void)
 {
-    dewpoint = 243.04 * (log(humidity/100.0) + ((17.625 * temperature)/(243.04 + temperature)))
+	float temperature = readTemperature();
+	float humidity = readHumidity();
+    float dewpoint = 243.04 * (log(humidity/100.0) + ((17.625 * temperature)/(243.04 + temperature)))
     /(17.625 - log(humidity/100.0) - ((17.625 * temperature)/(243.04 + temperature)));
 	
 	return dewpoint;
@@ -141,8 +136,10 @@ float xSW01::getDewPoint(void)
 /********************************************************
  	Read Temperature from BME280 Sensor 
 *********************************************************/
-void xSW01::readTemperature(void)
+float xSW01::readTemperature(void)
 {
+	float temperature;
+
     int32_t var1, var2;
     
     int32_t rawTemp = ((uint32_t)xCore.read8(BME280_I2C_ADDRESS, BME280_REG_TEMP_MSB) << 12);
@@ -159,13 +156,17 @@ void xSW01::readTemperature(void)
     temperature  = (t_fine * 5 + 128) >> 8;
     
     temperature = temperature / 100;
+
+	return temperature;
 }
 
 /********************************************************
  	Read Pressure from BME280 Sensor 
 *********************************************************/
-void xSW01::readPressure(void)
+float xSW01::readPressure(void)
 {
+	float pressure;
+
 	int64_t var1, var2, p;
     
     int32_t rawPressure = xCore.read24(BME280_I2C_ADDRESS, BME280_REG_PRESSURE);    
@@ -195,14 +196,17 @@ void xSW01::readPressure(void)
     p = ((p + var1 + var2) >> 8) + (((int64_t)cal_data.dig_P7)<<4);
     
     pressure = (float)p/256;
+
+	return pressure;
 }
 
 /********************************************************
  	Read Humidity from BME280 Sensor 
 *********************************************************/
-void xSW01::readHumidity(void)
+float xSW01::readHumidity(void)
 {
-	    
+	float humidity;
+
     int32_t rawHumidity = xCore.read16(BME280_I2C_ADDRESS, BME280_REG_HUMID);
     
     int32_t v_x1_u32r;
@@ -223,8 +227,10 @@ void xSW01::readHumidity(void)
     v_x1_u32r = (v_x1_u32r > 419430400) ? 419430400 : v_x1_u32r;
     
     float h = (v_x1_u32r>>12);
-    
+
     humidity = h / 1024.0;
+
+    return humidity;
 }
 
 /********************************************************
