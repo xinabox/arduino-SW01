@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/xinabox/arduino-SW01.svg?branch=master)](https://travis-ci.org/xinabox/arduino-SW01)
-[![GitHub issues](https://img.shields.io/github/issues/xinabox/arduino-SW01.svg)](https://github.com/xinabox/arduino-SW01/issues) ![GitHub Commit](https://img.shields.io/github/last-commit/xinabox/arduino-SW01) ![Maintained](https://img.shields.io/maintenance/yes/2020)
+[![GitHub issues](https://img.shields.io/github/issues/xinabox/arduino-SW01.svg)](https://github.com/xinabox/arduino-SW01/issues) ![GitHub Commit](https://img.shields.io/github/last-commit/xinabox/arduino-SW01) ![Maintained](https://img.shields.io/maintenance/yes/2020) [![Coverage Status](https://coveralls.io/repos/github/xinabox/arduino-SW01/badge.svg?branch=master)](https://coveralls.io/github/xinabox/arduino-SW01?branch=master)
 
 # ☒CHIP SW01 
 <img src="extras/SW01-V1.0.1.JPG" width="35%" height="auto" align="right">
