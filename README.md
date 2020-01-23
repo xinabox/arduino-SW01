@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/xinabox/arduino-SW01.svg?branch=master)](https://travis-ci.org/xinabox/arduino-SW01)
+
+
 # ☒CHIP SW01 
 <img src="extras/SW01-V1.0.1.JPG" width="35%" height="auto" align="right">
 Digital (I2C) Humidity, Pressure and Temperature Sensor.
