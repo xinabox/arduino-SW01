@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/xinabox/arduino-SW01.svg?branch=master)](https://travis-ci.org/xinabox/arduino-SW01)
-[![GitHub issues](https://img.shields.io/github/issues/xinabox/arduino-SW01.svg)](https://github.com/xinabox/arduino-SW01/issues) [![GitHub commit](https://img.shields.io/github/last-commit/xinabox/arduino-SW01.svg)]
+[![GitHub issues](https://img.shields.io/github/issues/xinabox/arduino-SW01.svg)](https://github.com/xinabox/arduino-SW01/issues) [GitHub commit](https://img.shields.io/github/last-commit/xinabox/arduino-SW01.svg)
 
 # ☒CHIP SW01 
 <img src="extras/SW01-V1.0.1.JPG" width="35%" height="auto" align="right">
